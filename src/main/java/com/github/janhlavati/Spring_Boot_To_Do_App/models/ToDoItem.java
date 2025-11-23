@@ -1,6 +1,5 @@
 package com.github.janhlavati.Spring_Boot_To_Do_App.models;
 
-import com.github.janhlavati.Spring_Boot_To_Do_App.controllers.ToDoItemController;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,14 +7,14 @@ import lombok.Setter;
 import java.time.Instant;
 
 @Entity
-@Table(name = "todoitem")
+@Table(name = "todo_item")
 public class ToDoItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @Setter
-    private long id;
+    private Long id;
 
     @Getter
     @Setter
@@ -44,6 +43,6 @@ public class ToDoItem {
 
     @Override
     public String toString() {
-        return String.format("ToDoItem{id='%d', description='%s', complete='%s', createdDate='%s', modifiedDate='%s'}", id, description, complete, createdDate, modifiedDate);
-    }
+        return String.format("TodoItem{id=%d, description='%s', complete='%s', createdDate='%s', modifiedDate='%s'}",
+                id, description, complete, createdDate, modifiedDate);    }
 }
