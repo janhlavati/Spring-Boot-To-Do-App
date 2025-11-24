@@ -1,6 +1,7 @@
 package com.github.janhlavati.Spring_Boot_To_Do_App.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +19,7 @@ public class ToDoItem {
 
     @Getter
     @Setter
+    @NotBlank (message = "Description is required")
     private String description;
 
     @Getter
