@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css} " />
 </head>
-<body>
+<body th:style="'background-color: pink;'">
     <div class="container">
         <div class="col-md-6">
             <form action="#"
@@ -25,7 +25,7 @@
                     </label>
                 </div>
 
-                <button class="btn btn-default" type="submit">Update</button>
+                <button th:style="'background-color: hotpink; border: hotpink;'" class="btn btn-default" type="submit">Update</button>
 
                 <input type="hidden" th:field="*{createdDate}"/>
                 <input type="hidden" th:field="*{modifiedDate}"/>
