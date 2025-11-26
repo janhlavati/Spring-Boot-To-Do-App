@@ -49,9 +49,13 @@ public class ToDoItemController {
     @PostMapping("/todo/{id}")
     public String updateToDoItem(@PathVariable("id") Long id, @Valid ToDoItem toDoItem, BindingResult result, Model model) {
         if(result.hasErrors()) {
-            toDoItem.setId(id);
+            ToDoItem originalItem = toDoItemRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid todo Id:" + id));
+            model.addAttribute("toDoItem", originalItem);
+
             return "update-todo-item";
         }
+        toDoItem.setId(id);
 
         toDoItem.setModifiedDate(Instant.now());
         toDoItemRepository.save(toDoItem);
