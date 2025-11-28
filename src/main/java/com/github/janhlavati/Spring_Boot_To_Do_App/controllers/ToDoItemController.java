@@ -2,6 +2,7 @@ package com.github.janhlavati.Spring_Boot_To_Do_App.controllers;
 
 import com.github.janhlavati.Spring_Boot_To_Do_App.models.ToDoItem;
 import com.github.janhlavati.Spring_Boot_To_Do_App.repositories.ToDoItemRepository;
+import com.github.janhlavati.Spring_Boot_To_Do_App.services.ToDoService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +26,25 @@ public class ToDoItemController {
     @Autowired
     private ToDoItemRepository toDoItemRepository;
 
+    private final ToDoService toDoService;
+
+    public ToDoItemController(ToDoItemRepository toDoItemRepository, ToDoService toDoService) {
+        this.toDoItemRepository = toDoItemRepository;
+        this.toDoService = toDoService;
+    }
+
+
     @GetMapping("/")
-    public ModelAndView index() {
-        logger.debug("request to GET index");
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("todoItems", toDoItemRepository.findAll());
+    public ModelAndView showTodayTasks() {
+        logger.debug("request to GET today's tasks");
+        ModelAndView modelAndView = new ModelAndView("index"); // Reuse the index view
+
+        // Call the service method to get only today's tasks
+        // NOTE: Ensure your service method name matches (e.g., getTasksCreatedTodayNative)
+        modelAndView.addObject("todoItems", toDoService.getTasksCreatedTodayWithoutRepositoryMethod());
+
         modelAndView.addObject("today", Instant.now().atZone(ZoneId.systemDefault()).toLocalDate().getDayOfWeek());
+        modelAndView.addObject("viewTitle", "Tasks Created Today"); // Optional: for custom view title
         return modelAndView;
     }
 

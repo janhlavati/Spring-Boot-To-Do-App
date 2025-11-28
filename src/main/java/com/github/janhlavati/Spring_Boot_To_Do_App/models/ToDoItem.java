@@ -4,11 +4,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+import com.github.janhlavati.Spring_Boot_To_Do_App.repositories.ToDoItemRepository;
 
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Locale;
 
 @Entity
@@ -45,11 +48,13 @@ public class ToDoItem {
     public ToDoItem(String description) {
         this.description = description;
         this.complete = false;
-        this.createdDate = Instant.now().plusSeconds(3600);
-        this.modifiedDate = Instant.now().plusSeconds(3600);
+        this.createdDate = Instant.now();
+        this.modifiedDate = Instant.now();
     }
 
-    private static final ZoneId CET_ZONE = ZoneId.of("Europe/Belgrade");
+
+
+    public static final ZoneId CET_ZONE = ZoneId.of("Europe/Belgrade");
     private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern(
             "dd-MM-yyyy HH:mm:ss z", Locale.ENGLISH
     );
@@ -73,6 +78,8 @@ public class ToDoItem {
         ZonedDateTime cetTime = this.modifiedDate.atZone(CET_ZONE);
         return cetTime.format(DISPLAY_FORMATTER);
     }
+
+
 
     @Override
     public String toString() {
