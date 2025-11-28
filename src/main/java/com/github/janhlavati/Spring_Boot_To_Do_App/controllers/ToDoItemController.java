@@ -37,14 +37,12 @@ public class ToDoItemController {
     @GetMapping("/")
     public ModelAndView showTodayTasks() {
         logger.debug("request to GET today's tasks");
-        ModelAndView modelAndView = new ModelAndView("index"); // Reuse the index view
+        ModelAndView modelAndView = new ModelAndView("index");
 
-        // Call the service method to get only today's tasks
-        // NOTE: Ensure your service method name matches (e.g., getTasksCreatedTodayNative)
         modelAndView.addObject("todoItems", toDoService.getTasksCreatedTodayWithoutRepositoryMethod());
 
         modelAndView.addObject("today", Instant.now().atZone(ZoneId.systemDefault()).toLocalDate().getDayOfWeek());
-        modelAndView.addObject("viewTitle", "Tasks Created Today"); // Optional: for custom view title
+        modelAndView.addObject("viewTitle", "Tasks Created Today");
         return modelAndView;
     }
 
