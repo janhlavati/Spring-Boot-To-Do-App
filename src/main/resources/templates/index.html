@@ -27,7 +27,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="item : ${todoItems}" th:class="${item.complete} ? success : warning">
+        <tr th:each="item : ${todoItems}" th:class="${item.complete} ? success : danger">
 
             <td>
                 <div class="btn btn-group-sm" role="group">
