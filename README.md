@@ -12,7 +12,7 @@ The application itself provides basic interface for effective daily task organiz
 
 🖥 Technologies
 
-This application is built on a Spring Boot foundation usig Maven for dependency management. Core technologies:
+This application is built on a Spring Boot foundation using Maven for dependency management. Core technologies:
 - Language: Java 21
 - Framework: Spring Boot 3.4.12
 - Build tool: Apache Maven
